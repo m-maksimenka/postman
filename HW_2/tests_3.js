@@ -4,41 +4,41 @@ pm.test("Status code is 200", function () {
 });
 
 // 2
-pm.test("JSON schema is OK", function() {
-    const schema = {
-        "type": "object",
-        "properties": {
-            "age": {
-                "type": "integer"
-            },
-            "name": {
-                "type": "string",
-            },
-            "salary": {
-                "type": "array",
-                "items": [
-                    {
-                        "type": "integer"
-                    },
-                    {
-                        "type": "string",
-                    },
-                    {
-                        "type": "string"
-                    }
-                ]
-            }
+const schema = {
+    "type": "object",
+    "properties": {
+        "age": {
+            "type": "integer"
+        },
+        "name": {
+            "type": "string",
+        },
+        "salary": {
+            "type": "array",
+            "items": [
+                {
+                    "type": "integer"
+                },
+                {
+                    "type": "string",
+                },
+                {
+                    "type": "string"
+                }
+            ]
         }
     }
+}
+
+pm.test("JSON schema is correct", function() {
     pm.response.to.have.jsonSchema(schema)
 });
 
-// for 3 and 4
-const requestData = request.data;
-const responseJson = pm.response.json();
+// 3
+let requestData = request.data;
+let responseJson = pm.response.json();
 let salary = parseInt(requestData.salary);
 
-// 3
 pm.test("Multiplication result is correct", function() {
     pm.expect(responseJson.salary[0]).to.eql(salary);
     pm.expect(Number(responseJson.salary[1])).to.eql(salary * 2);
