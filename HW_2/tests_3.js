@@ -40,9 +40,10 @@ pm.test("JSON schema is correct", function() {
 });
 
 // 3
+const requestData = request.data;
+const responseJson = pm.response.json();
+
 pm.test("Multiplication result is correct", function() {
-    let requestData = request.data;
-    let responseJson = pm.response.json();
     let salary = parseInt(requestData.salary);
     pm.expect(responseJson.salary[0]).to.eql(salary);
     pm.expect(Number(responseJson.salary[1])).to.eql(salary * 2);
