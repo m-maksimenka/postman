@@ -27,7 +27,12 @@ const schema = {
                 }
             ]
         }
-    }
+    },
+    "required": [
+        "age",
+        "name",
+        "salary"
+    ]
 }
 
 pm.test("JSON schema is correct", function() {
@@ -35,11 +40,10 @@ pm.test("JSON schema is correct", function() {
 });
 
 // 3
-let requestData = request.data;
-let responseJson = pm.response.json();
-let salary = parseInt(requestData.salary);
-
 pm.test("Multiplication result is correct", function() {
+    let requestData = request.data;
+    let responseJson = pm.response.json();
+    let salary = parseInt(requestData.salary);
     pm.expect(responseJson.salary[0]).to.eql(salary);
     pm.expect(Number(responseJson.salary[1])).to.eql(salary * 2);
     pm.expect(Number(responseJson.salary[2])).to.eql(salary * 3);
