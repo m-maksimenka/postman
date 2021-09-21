@@ -43,7 +43,11 @@ const schema = {
                 "u_salary_1_5_year": {
                     "type": "integer"
                 }
-            }
+            },
+            "required": [
+                "children",
+                "u_salary_1_5_year"
+            ]
         },
         "name": {
             "type": "string"
@@ -51,7 +55,13 @@ const schema = {
         "salary": {
             "type": "integer"
         }
-    }
+    },
+    "required": [
+        "age",
+        "family",
+        "name",
+        "salary"
+    ]
 }
 
 pm.test("JSON schema is correct", function() {
@@ -64,9 +74,8 @@ pm.test("Response property matches environment variable", function () {
 });
 
 // 4
-let requestData = request.data;
-let responseJson = pm.response.json();
-
 pm.test("Response property matches request property", function () {
+    let requestData = request.data;
+    let responseJson = pm.response.json();
     pm.expect(responseJson.age).to.eql(requestData.age);
 });
