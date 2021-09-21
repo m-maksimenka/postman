@@ -25,7 +25,15 @@ const schema = {
         "Date": {
             "type": "string"
         }
-    }
+    },
+    "required": [
+        "Cur_Abbreviation",
+        "Cur_ID",
+        "Cur_Name",
+        "Cur_OfficialRate",
+        "Cur_Scale",
+        "Date"
+    ]
 }
 
 pm.test("JSON schema is correct", function() {
