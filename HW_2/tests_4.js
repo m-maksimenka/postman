@@ -19,7 +19,13 @@ const schema = {
         "name": {
             "type": "string"
         }
-    }
+    },
+    "required": [
+        "age",
+        "daily_food",
+        "daily_sleep",
+        "name"
+    ]
 }
 
 pm.test("JSON schema is correct", function() {
@@ -27,13 +33,12 @@ pm.test("JSON schema is correct", function() {
 });
 
 // 3
-let requestData = request.data;
-let responseJson = pm.response.json();
-let weight = requestData.weight;
-let daily_food = responseJson.daily_food;
-let daily_sleep = responseJson.daily_sleep;
-
 pm.test("Multiplication result is correct", function() {
+    let requestData = request.data;
+    let responseJson = pm.response.json();
+    let weight = requestData.weight;
+    let daily_food = responseJson.daily_food;
+    let daily_sleep = responseJson.daily_sleep;
     pm.expect(daily_food).to.eql(weight * 0.012);
     pm.expect(daily_sleep).to.eql(weight * 2.5);
 });
