@@ -29,17 +29,22 @@ const schema = {
     "additionalProperties": false
 }
 
-pm.test("JSON schema is correct", function() {
-    pm.response.to.have.jsonSchema(schema);
+let jsonData = pm.response.json();
+
+pm.test("JSON schema is valid", function() {
+    pm.expect(tv4.validate(jsonData, schema)).to.be.true;
 });
 
 // 3
-pm.test("Multiplication result is correct", function() {
-    let requestData = request.data;
-    let responseJson = pm.response.json();
-    let weight = requestData.weight;
-    let daily_food = responseJson.daily_food;
-    let daily_sleep = responseJson.daily_sleep;
+let requestData = request.data;
+let weight = requestData.weight;
+let daily_food = jsonData.daily_food;
+let daily_sleep = jsonData.daily_sleep;
+
+pm.test("Result of multiplying by 0.012 is correct", function() {
     pm.expect(daily_food).to.eql(weight * 0.012);
+});
+
+pm.test("Result of multiplying by 2.5 is correct", function() {
     pm.expect(daily_sleep).to.eql(weight * 2.5);
 });
