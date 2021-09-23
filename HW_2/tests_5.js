@@ -72,8 +72,10 @@ const schema = {
     "additionalProperties": false
 }
 
-pm.test("JSON schema is correct", function() {
-    pm.response.to.have.jsonSchema(schema)
+let jsonData = pm.response.json();
+
+pm.test('JSON schema is valid', function () {
+    pm.expect(tv4.validate(jsonData, schema)).to.be.true;
 });
 
 // 3
@@ -82,8 +84,8 @@ pm.test("Response property matches environment variable", function () {
 });
 
 // 4
+let requestData = request.data;
+
 pm.test("Response property matches request property", function () {
-    let requestData = request.data;
-    let responseJson = pm.response.json();
-    pm.expect(responseJson.age).to.eql(requestData.age);
+    pm.expect(jsonData.age).to.eql(requestData.age);
 });
