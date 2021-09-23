@@ -37,6 +37,8 @@ const schema = {
     "additionalProperties": false
 }
 
-pm.test("JSON schema is correct", function() {
-    pm.response.to.have.jsonSchema(schema)
+let jsonData = pm.response.json();
+
+pm.test('JSON schema is valid', function () {
+    pm.expect(tv4.validate(jsonData, schema)).to.be.true;
 });
