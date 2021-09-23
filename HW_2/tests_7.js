@@ -33,7 +33,8 @@ const schema = {
         "Cur_OfficialRate",
         "Cur_Scale",
         "Date"
-    ]
+    ],
+    "additionalProperties": false
 }
 
 pm.test("JSON schema is correct", function() {
