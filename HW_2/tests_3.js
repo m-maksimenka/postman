@@ -15,6 +15,8 @@ const schema = {
         },
         "salary": {
             "type": "array",
+            "minItems": 3,
+            "maxItems": 3,
             "items": [
                 {
                     "type": "integer"
@@ -32,7 +34,8 @@ const schema = {
         "age",
         "name",
         "salary"
-    ]
+    ],
+    "additionalProperties": false
 }
 
 pm.test("JSON schema is correct", function() {
