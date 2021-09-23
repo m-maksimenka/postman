@@ -25,7 +25,8 @@ const schema = {
         "daily_food",
         "daily_sleep",
         "name"
-    ]
+    ],
+    "additionalProperties": false
 }
 
 pm.test("JSON schema is correct", function() {
