@@ -35,7 +35,8 @@ const schema = {
                 "u_age",
                 "u_name",
                 "u_salary_1_5_year"
-            ]
+            ],
+            "additionalProperties": false
         },
         "qa_salary_after_12_months": {
             "type": "integer"
@@ -52,7 +53,8 @@ const schema = {
         "qa_salary_after_12_months",
         "qa_salary_after_6_months",
         "start_qa_salary"
-    ]
+    ],
+    "additionalProperties": false
 }
 
 pm.test("JSON schema is correct", function() {
