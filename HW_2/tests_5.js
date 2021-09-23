@@ -15,9 +15,13 @@ const schema = {
             "properties": {
                 "children": {
                     "type": "array",
+                    "minItems": 2,
+                    "maxItems": 2,
                     "items": [
                         {
                             "type": "array",
+                            "minItems": 2,
+                            "maxItems": 2,
                             "items": [
                                 {
                                     "type": "string"
@@ -29,6 +33,8 @@ const schema = {
                         },
                         {
                             "type": "array",
+                            "minItems": 2,
+                            "maxItems": 2,
                             "items": [
                                 {
                                     "type": "string"
@@ -47,7 +53,8 @@ const schema = {
             "required": [
                 "children",
                 "u_salary_1_5_year"
-            ]
+            ],
+            "additionalProperties": false
         },
         "name": {
             "type": "string"
@@ -61,7 +68,8 @@ const schema = {
         "family",
         "name",
         "salary"
-    ]
+    ],
+    "additionalProperties": false
 }
 
 pm.test("JSON schema is correct", function() {
