@@ -15,6 +15,8 @@ const schema = {
                 },
                 "u_name": {
                     "type": "array",
+                    "minItems": 3,
+                    "maxItems": 3,
                     "items": [
                         {
                             "type": "string"
