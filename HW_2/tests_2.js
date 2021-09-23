@@ -59,23 +59,30 @@ const schema = {
     "additionalProperties": false
 }
 
-pm.test("JSON schema is correct", function() {
-    pm.response.to.have.jsonSchema(schema)
+let jsonData = pm.response.json();
+
+pm.test("JSON schema is valid", function() {
+    pm.expect(tv4.validate(jsonData, schema)).to.be.true;
 });
 
 // 3
-pm.test("Multiplication result is correct", function() {
-    let requestData = JSON.parse(request.data);
-    let responseJson = pm.response.json();
-    let salary = requestData.salary;
-    let qa_salary_after_6_months = responseJson.qa_salary_after_6_months;
-    let qa_salary_after_12_months = responseJson.qa_salary_after_12_months;
-    let u_salary_1_5_year = responseJson.person.u_salary_1_5_year;
+let requestData = JSON.parse(request.data);
+let salary = requestData.salary;
+let qa_salary_after_6_months = jsonData.qa_salary_after_6_months;
+let qa_salary_after_12_months = jsonData.qa_salary_after_12_months;
+let u_salary_1_5_year = jsonData.person.u_salary_1_5_year;
+
+pm.test("Multiplication by 2 is correct", function() {
     pm.expect(qa_salary_after_6_months).to.eql(salary * 2);
+});
+
+pm.test("Multiplication by 2.9 is correct", function() {
     pm.expect(qa_salary_after_12_months).to.eql(salary * 2.9);
+});
+
+pm.test("Multiplication by 4 is correct", function() {
     pm.expect(u_salary_1_5_year).to.eql(salary * 4);
 });
 
 // 4
-let jsonData = pm.response.json();
 pm.environment.set("salary", jsonData.person.u_salary_1_5_year);
